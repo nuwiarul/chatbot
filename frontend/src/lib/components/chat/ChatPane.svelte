@@ -2,6 +2,7 @@
   import type { ChatMessage } from '$lib/utils/types';
   import Button from '$lib/components/ui/Button.svelte';
   import { chatStream } from '$lib/api/chat';
+  import MarkdownMessage from '$lib/components/chat/MarkdownMessage.svelte';
 
   let input = '';
   let messages: ChatMessage[] = [{ role: 'assistant', content: 'Halo! Tanyakan apa saja.' }];
@@ -47,7 +48,13 @@
     {#each messages as m}
       <div class="text-sm">
         <span class="font-semibold">{m.role}:</span>
-        <span class="ml-2">{m.content}</span>
+        <span class="ml-2">
+          {#if m.role === 'assistant'}
+            <MarkdownMessage text={m.content} />
+          {:else}
+            {m.content}
+          {/if}
+        </span>
       </div>
     {/each}
   </div>

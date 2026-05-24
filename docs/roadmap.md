@@ -14,6 +14,8 @@ Checklist ini dipakai supaya progres rapi dan mudah di-review.
 - [x] Frontend chat UI call backend `/v1/chat`
 - [x] Docs: kontrak request/response chat + cara troubleshooting
 - [x] Streaming chat (SSE) untuk LLM
+- [x] Render Markdown assistant (code/quote) di UI
+- [x] Frontend build sebagai SPA (no SSR)
 
 ## Phase 2 — Schema RAG (pgvector)
 - [ ] SQLx migrations: `documents`, `chunks`, `embeddings(vector)`
