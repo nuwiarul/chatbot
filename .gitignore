@@ -1,0 +1,26 @@
+# General
+.DS_Store
+Thumbs.db
+
+# Env
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+
+# Rust
+/backend/target
+/backend/.sqlx
+
+# Node/SvelteKit
+/frontend/node_modules
+/frontend/.svelte-kit
+/frontend/build
+/frontend/.vite
+
+# IDE
+.idea/
+.vscode/
+
