@@ -1,5 +1,6 @@
 use crate::error::{AppError, AppResult};
 use crate::http::AppState;
+use crate::http::llm::{apply_system_policy, ChatMessage};
 use axum::extract::State;
 use axum::routing::post;
 use axum::Json;
@@ -16,20 +17,6 @@ pub struct ChatRequest {
     pub temperature: Option<f32>,
     #[serde(default)]
     pub max_tokens: Option<u32>,
-}
-
-#[derive(Debug, Deserialize, Serialize, Clone)]
-pub struct ChatMessage {
-    pub role: Role,
-    pub content: String,
-}
-
-#[derive(Debug, Deserialize, Serialize, Clone)]
-#[serde(rename_all = "lowercase")]
-pub enum Role {
-    System,
-    User,
-    Assistant,
 }
 
 #[derive(Debug, Serialize)]
@@ -67,7 +54,7 @@ pub async fn chat(
 
     let payload = OpenAiChatCompletionsRequest {
         model: "local-model",
-        messages: req.messages,
+        messages: apply_system_policy(req.messages),
         temperature: req.temperature,
         max_tokens: req.max_tokens,
         stream: false,

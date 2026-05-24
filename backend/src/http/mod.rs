@@ -1,4 +1,5 @@
 pub mod handlers;
+pub mod llm;
 pub mod middleware;
 
 use crate::config::Config;
