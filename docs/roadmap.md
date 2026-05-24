@@ -13,6 +13,7 @@ Checklist ini dipakai supaya progres rapi dan mudah di-review.
 - [x] Backend auth API key untuk semua endpoint selain `/health` (middleware/router-level)
 - [x] Frontend chat UI call backend `/v1/chat`
 - [x] Docs: kontrak request/response chat + cara troubleshooting
+- [x] Streaming chat (SSE) untuk LLM
 
 ## Phase 2 — Schema RAG (pgvector)
 - [ ] SQLx migrations: `documents`, `chunks`, `embeddings(vector)`

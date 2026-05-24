@@ -13,3 +13,7 @@ export type ChatResponse = {
   message: ChatMessage;
 };
 
+export type ChatStreamEvent =
+  | { type: 'delta'; data: string }
+  | { type: 'done'; data: '[DONE]' }
+  | { type: 'keep-alive'; data: string };

@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { ChatMessage } from '$lib/utils/types';
   import Button from '$lib/components/ui/Button.svelte';
-  import { chat } from '$lib/api/chat';
+  import { chatStream } from '$lib/api/chat';
 
   let input = '';
   let messages: ChatMessage[] = [{ role: 'assistant', content: 'Halo! Tanyakan apa saja.' }];
@@ -12,14 +12,30 @@
     if (text.length === 0) return;
     if (sending) return;
 
-    const nextMessages: ChatMessage[] = [...messages, { role: 'user', content: text }];
-    messages = nextMessages;
+    const baseMessages: ChatMessage[] = [...messages, { role: 'user', content: text }];
+    messages = baseMessages;
     input = '';
 
     try {
       sending = true;
-      const res = await chat({ messages: nextMessages });
-      messages = [...nextMessages, res.message];
+      // Add an empty assistant message that will be filled by streaming deltas
+      let assistantIndex = -1;
+      messages = [
+        ...baseMessages,
+        { role: 'assistant', content: '' }
+      ];
+      assistantIndex = messages.length - 1;
+
+      await chatStream({ messages: baseMessages }, (ev) => {
+        if (ev.type === 'delta') {
+          const current = messages[assistantIndex];
+          messages = [
+            ...messages.slice(0, assistantIndex),
+            { ...current, content: current.content + ev.data },
+            ...messages.slice(assistantIndex + 1)
+          ];
+        }
+      });
     } finally {
       sending = false;
     }
