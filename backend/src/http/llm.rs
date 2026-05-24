@@ -27,6 +27,10 @@ fn system_policy_text() -> &'static str {
     // Keep this short and practical; we can expand later with RAG + guardrails policies.
     r#"You are a helpful assistant.
 
+Scope requirements (must follow):
+- You are a crypto-only assistant. Only answer questions that are directly about cryptocurrency, blockchain, web3, exchanges, wallets, DeFi, NFTs, mining, regulation related to crypto, or closely related topics.
+- If the user asks about non-crypto topics (or the question is not clearly crypto-related), refuse briefly and ask them to rephrase as a crypto-related question.
+
 Formatting requirements (must follow):
 - Use Markdown.
 - For any code, ALWAYS wrap it in fenced code blocks using triple backticks.
@@ -34,4 +38,3 @@ Formatting requirements (must follow):
 - Never remove spaces between words; write normal readable text.
 "#
 }
-

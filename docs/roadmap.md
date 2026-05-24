@@ -19,8 +19,8 @@ Checklist ini dipakai supaya progres rapi dan mudah di-review.
 - [x] System prompt: paksa output Markdown + fenced code blocks
 
 ## Phase 2 — Schema RAG (pgvector)
-- [ ] SQLx migrations: `documents`, `chunks`, `embeddings(vector)`
-- [ ] Index vektor (pgvector) untuk retrieval
+- [x] SQLx migrations: `documents`, `chunks`, `embeddings(vector)`
+- [x] Index vektor (pgvector) untuk retrieval
 
 ## Phase 3 — Ingestion
 - [ ] Endpoint ingest teks sederhana
